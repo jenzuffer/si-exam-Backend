@@ -6,37 +6,34 @@ import com.rabbitmq.client.ConnectionFactory;
 
 public class rabbitProducer {
 
-    private static String queueName = "queue-name";
-    private final static String EXCHANGE_NAME = "";
+    private final static String QUEUE_NAME = "queue-name";
     private static String hostname = "localhost";
-    private static String routingKey = "queue-name";
-    private static String message = "Hello World from java rabbit producer!";
 
     public static void main(String[] args) throws Exception
     {
-
-        // args[0]-message; args[1]-topics
-        if (args.length > 0) message = args[0];
-        if (args.length > 1) routingKey = args[1];
-
-        createQueue(message, routingKey);
-        System.out.println(" [4] Sent routing key '" + routingKey + "' and message '" + message + "'");
+        String message = "Message send from si-exam-backend rabbit producer to " +
+                "python rabbit consumer";
+        createQueueSendMessage(message);
+        System.out.println("sent message: " + message);
     }
+    /*
+    queueDeclare Parameters:
+    queue - the name of the queue
+    durable - true if we are declaring a durable queue (the queue will survive a server restart)
+    exclusive - true if we are declaring an exclusive queue (restricted to this connection)
+    autoDelete - true if we are declaring an autodelete queue (server will delete it when no longer in use)
+    arguments - other properties (construction arguments) for the queue
+     */
 
-    public static void createQueue(String message, String rKey) throws Exception
+    public static void createQueueSendMessage(String message) throws Exception
     {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostname);
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel())
         {
-            queueName = channel.queueDeclare().getQueue();
-            channel.exchangeDeclare(EXCHANGE_NAME, "");
-
-            channel.queueDeclare(queueName, false, false, false, null);
-            // bind Exchange to queue
-            channel.queueBind(queueName, EXCHANGE_NAME, "");
-            channel.basicPublish(EXCHANGE_NAME, rKey, null, message.getBytes("UTF-8"));
+            channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+            channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
         }
     }
 }
