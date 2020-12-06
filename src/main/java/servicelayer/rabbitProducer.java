@@ -6,10 +6,10 @@ import com.rabbitmq.client.ConnectionFactory;
 
 public class rabbitProducer {
 
-    private static String queueName = null;
+    private static String queueName = "queue-name";
     private final static String EXCHANGE_NAME = "";
     private static String hostname = "localhost";
-    private static String routingKey = "";
+    private static String routingKey = "queue-name";
     private static String message = "Hello World from java rabbit producer!";
 
     public static void main(String[] args) throws Exception
@@ -30,12 +30,12 @@ public class rabbitProducer {
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel())
         {
-            // queueName = channel.queueDeclare().getQueue();
-            channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+            queueName = channel.queueDeclare().getQueue();
+            channel.exchangeDeclare(EXCHANGE_NAME, "");
 
-            // channel.queueDeclare(queueName, false, false, false, null);
+            channel.queueDeclare(queueName, false, false, false, null);
             // bind Exchange to queue
-            // channel.queueBind(queueName, EXCHANGE_NAME, "");
+            channel.queueBind(queueName, EXCHANGE_NAME, "");
             channel.basicPublish(EXCHANGE_NAME, rKey, null, message.getBytes("UTF-8"));
         }
     }
