@@ -1,4 +1,4 @@
-package rabbitProducer;
+package servicelayer;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,6 +8,7 @@ public class rabbitProducer {
 
     private static String queueName = null;
     private final static String EXCHANGE_NAME = "";
+    private static String hostname = "localhost";
     private static String routingKey = "";
     private static String message = "Hello World from java rabbit producer!";
 
@@ -25,7 +26,7 @@ public class rabbitProducer {
     public static void createQueue(String message, String rKey) throws Exception
     {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost(hostname);
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel())
         {
