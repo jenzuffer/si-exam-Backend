@@ -11,15 +11,16 @@ public class BookingHandler implements BookingUtility {
 
     @Override
     public boolean createBooking(CreateBookingDTO createBookingDTO) {
-        boolean booking =  logichandler.createBooking(createBookingDTO);
-        String message = "Message send from si-exam-backend rabbit producer to " +
-                "python rabbit consumer";
-        try {
-            rabbitProducer.createQueueSendMessage(message);
-        } catch (Exception e) {
-            e.printStackTrace();
+        boolean booking = logichandler.createBooking(createBookingDTO);
+        if (!booking) {
+            String message = "failed to create booking in system";
+            try {
+                rabbitProducer.createQueueSendMessage(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("sent message: " + message);
         }
-        System.out.println("sent message: " + message);
         return booking;
     }
 
