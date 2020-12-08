@@ -5,6 +5,9 @@ import dto.CreateBookingDTO;
 import backendapplication.logiclayer.logicHandler;
 import service.BookingUtility;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class BookingHandler implements BookingUtility {
     private static logicHandler logichandler = new logicHandler();
     private static RabbitProducer rabbitProducer = new RabbitProducer();
@@ -13,7 +16,10 @@ public class BookingHandler implements BookingUtility {
     public boolean createBooking(CreateBookingDTO createBookingDTO) {
         boolean booking = logichandler.createBooking(createBookingDTO);
         if (!booking) {
-            String message = "failed to create booking in system";
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            String message = "failed to create booking in system for " + createBookingDTO.getPassportNumber()
+                    + " at " + createBookingDTO.getArrival() + " and " + createBookingDTO.getDeparture()
+                    + " for rooms: " + createBookingDTO.getRoomNumbers() + " at time: " + timeStamp;
             try {
                 rabbitProducer.createQueueSendMessage(message);
             } catch (Exception e) {

@@ -128,7 +128,7 @@ public class DataHandler {
         String sql = "select room_number from accomodations.room r where r.is_vacant = false";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String room_number = rs.getString(1);
                 for (String roomNumber : roomNumbers) {
                     if (room_number.equals(roomNumber)) {

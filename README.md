@@ -16,7 +16,7 @@ json body:
     "departure": "2021-07-01",
     "lateArrival": false
 }
-url: http://localhost:9090/booking 
+url: http://localhost:9091/booking 
 method: POST
 header: Content-Type 
 value: application/json

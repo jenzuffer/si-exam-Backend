@@ -8,3 +8,13 @@
 2020-12-08 13:12:03 INFO  DataHandler:32 - Made connection to DB
 2020-12-08 13:26:59 INFO  DataHandler:32 - Made connection to DB
 2020-12-08 13:27:01 INFO  DataHandler:32 - Made connection to DB
+2020-12-08 13:35:36 INFO  DataHandler:135 - did not create booking, rooms reserved already: 123M
+2020-12-08 14:02:58 INFO  DataHandler:32 - Made connection to DB
+2020-12-08 14:03:00 INFO  DataHandler:32 - Made connection to DB
+2020-12-08 14:05:01 INFO  DataHandler:135 - did not create booking, rooms reserved already: 123M
+2020-12-08 14:06:34 INFO  DataHandler:135 - did not create booking, rooms reserved already: 123M
+2020-12-08 14:06:43 INFO  DataHandler:135 - did not create booking, rooms reserved already: 123M
+2020-12-08 14:11:01 INFO  DataHandler:32 - Made connection to DB
+2020-12-08 14:11:03 INFO  DataHandler:32 - Made connection to DB
+2020-12-08 14:11:36 INFO  DataHandler:135 - did not create booking, rooms reserved already: 123S
+2020-12-08 14:11:44 INFO  DataHandler:135 - did not create booking, rooms reserved already: 223M
