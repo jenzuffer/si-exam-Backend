@@ -1,3 +1,7 @@
-servicelayer\rabbitProducer.class
-datalayer\dataHandler.class
-servicelayer\rmiHandler.class
+backendapplication\datalayer\DataHandler.class
+backendapplication\datalayer\DBSettings.class
+backendapplication\service\RabbitProducer.class
+backendapplication\service\RoomHandler.class
+backendapplication\service\BookingHandler.class
+backendapplication\logiclayer\logicHandler.class
+backendapplication\service\HotelHandler.class
