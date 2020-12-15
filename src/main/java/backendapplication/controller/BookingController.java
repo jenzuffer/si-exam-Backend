@@ -15,7 +15,6 @@ public class BookingController {
     public boolean cancelBooking(@PathVariable Integer bookingid){return bookingHandler.cancelBooking(bookingid);}
 
     @GetMapping("/{bookingid}")
-    @ResponseBody
     public BookingDTO findBooking(@PathVariable Integer bookingid){return bookingHandler.findBooking(bookingid);}
 
     @PostMapping("")
